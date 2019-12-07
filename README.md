@@ -1,6 +1,6 @@
 This repository is createded for Hackday 2019.
 
-## 事前準備
+## 事前準備🐶
 * 事前準備のディレクトリ作っておくので、そこで自由に調査などしましょう
 
 ### 目的
@@ -15,7 +15,7 @@ This repository is createded for Hackday 2019.
 * [3Dモデリング技術調査](preparing/kurosawa/3Dモデリング周り調査.md)
 * Pythonで書いたモデルはiOSで使えるのか？？
 
-## Hackday当日やること
+## Hackday当日やること🏈
 * TODO: 自分のタスクをREADMEにサクッと書いてみる
 
 ### 斎藤
@@ -25,5 +25,5 @@ This repository is createded for Hackday 2019.
 ### 黒澤
 * じゃがいも制作
 
-## コミットテスト
+## コミットテスト🤖
 この辺に好きに書いてコミット→プッシュのテストお願いします
