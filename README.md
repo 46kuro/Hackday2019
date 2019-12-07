@@ -12,8 +12,8 @@ This repository is createded for Hackday 2019.
 ### 奥島
 
 ### 黒澤
-* [3Dモデリング技術調査](preparing/kurosawa/3Dモデリング技術調査)
-#### Pythonで書いたモデルはiOSで使えるのか？？
+* [3Dモデリング技術調査](preparing/kurosawa/3Dモデリング周り調査.md)
+* Pythonで書いたモデルはiOSで使えるのか？？
 
 ## Hackday当日やること
 * TODO: 自分のタスクをREADMEにサクッと書いてみる
