@@ -7,8 +7,10 @@ This repository is createded for Hackday 2019.
 * ある程度、作業の全体像が見えておくようにする
   * I/Fレベルで自分の作業が分かるようにしておく
 
-### 斎藤
-
+### 齋藤
+* カメラ上にオブジェクトを表示する技術について
+    * AR Kit以外の選択肢は？
+    * オブジェクトを表示するとなると、Scene KitやSprit Kitか
 ### 奥島
 
 ### 黒澤
@@ -18,7 +20,7 @@ This repository is createded for Hackday 2019.
 ## Hackday当日やること🏈
 * TODO: 自分のタスクをREADMEにサクッと書いてみる
 
-### 斎藤
+### KENGO
 
 ### 奥島
 
@@ -27,3 +29,5 @@ This repository is createded for Hackday 2019.
 
 ## コミットテスト🤖
 この辺に好きに書いてコミット→プッシュのテストお願いします
+
+楽しみ！
