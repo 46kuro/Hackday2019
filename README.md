@@ -11,6 +11,7 @@ This repository is createded for Hackday 2019.
 * カメラ上にオブジェクトを表示する技術について
     * AR Kit以外の選択肢は？
     * オブジェクトを表示するとなると、Scene KitやSprit Kitか
+    * やはり合わせ技になりそう
 ### 奥島
 
 ### 黒澤
@@ -21,6 +22,12 @@ This repository is createded for Hackday 2019.
 * TODO: 自分のタスクをREADMEにサクッと書いてみる
 
 ### KENGO
+* 適当なモデルを読み込んでスクリーンに表示させる
+    * SceneKitだけでいけるはず
+    * https://qiita.com/noby111/items/d2115b58b3f98958e576
+* 適当なモデルを現実空間内に表示させる
+* モデルの位置を受けて、適切な位置に移動できるようにする
+    * 多分位置の調整が難しい
 
 ### 奥島
 
