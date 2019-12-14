@@ -15,22 +15,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kUl-Yn-Hih">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="rtj-mT-aXz">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kUl-Yn-Hih">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="426"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EV7-OT-NOY">
+                                        <rect key="frame" x="0.0" y="426" width="414" height="426"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kUl-Yn-Hih" secondAttribute="trailing" id="8cr-45-8st"/>
-                            <constraint firstItem="kUl-Yn-Hih" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Ch9-CY-8bC"/>
-                            <constraint firstItem="kUl-Yn-Hih" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Rk2-3e-sBW"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kUl-Yn-Hih" secondAttribute="bottom" id="gIj-Kq-H2g"/>
+                            <constraint firstAttribute="trailing" secondItem="rtj-mT-aXz" secondAttribute="trailing" id="5WG-X4-HCp"/>
+                            <constraint firstAttribute="bottom" secondItem="rtj-mT-aXz" secondAttribute="bottom" id="VMX-rU-cTD"/>
+                            <constraint firstItem="rtj-mT-aXz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cmu-PZ-clw"/>
+                            <constraint firstItem="rtj-mT-aXz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jhe-xk-txx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="cameraView" destination="kUl-Yn-Hih" id="fD9-17-dEF"/>
+                        <outlet property="duplicatedCameraView" destination="EV7-OT-NOY" id="7de-Lk-g4p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

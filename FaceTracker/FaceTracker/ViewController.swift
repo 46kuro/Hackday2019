@@ -13,8 +13,8 @@ import SceneKit
 class ViewController: UIViewController {
 
     var faceTracker: FaceTracker? = nil;
-    //viewController上に一つviewを敷いてそれと繋いでおく
     @IBOutlet var cameraView :UIView!
+    @IBOutlet weak var duplicatedCameraView: UIView!
 
     let eggView = SCNView()
     let rect = UIView()
@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        faceTracker = FaceTracker(view: self.cameraView, findface:{arr in
+        faceTracker = FaceTracker(view: self.cameraView, duplicatedView: duplicatedCameraView) { arr in
             if arr.count < 1 {
                 self.eggView.isHidden = true
             }
@@ -43,7 +43,7 @@ class ViewController: UIViewController {
                 self.eggView.frame = rect1
                 self.rect.frame = rect1
             }
-        })
+        }
     }
     
     private func setupEggView() {

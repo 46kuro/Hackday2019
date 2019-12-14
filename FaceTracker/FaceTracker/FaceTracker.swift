@@ -9,17 +9,19 @@
 import UIKit
 import AVFoundation
 
-class FaceTracker: NSObject,AVCaptureVideoDataOutputSampleBufferDelegate {
-    let captureSession = AVCaptureSession()
+class FaceTracker: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
+    let captureSession = AVCaptureSession() 
     let videoDevice = AVCaptureDevice.default(for: AVMediaType.video)
     let audioDevice = AVCaptureDevice.default(for: AVMediaType.audio)
 
     var videoOutput = AVCaptureVideoDataOutput()
-    var view:UIView
-    private var findface : (_ arr:Array<CGRect>) -> Void
-    required init(view:UIView, findface: @escaping (_ arr:Array<CGRect>) -> Void)
-    {
-        self.view=view
+    let duplicatedView: UIView
+    let view: UIView
+    
+    private var findface: (_ arr: Array<CGRect>) -> Void
+    required init(view: UIView, duplicatedView: UIView, findface: @escaping (_ arr: Array<CGRect>) -> Void) {
+        self.view = view
+        self.duplicatedView = duplicatedView
         self.findface = findface
         super.init()
         self.initialize()
@@ -28,37 +30,24 @@ class FaceTracker: NSObject,AVCaptureVideoDataOutputSampleBufferDelegate {
 
     func initialize()
     {
-        //各デバイスの登録(audioは実際いらない)
+        // 各デバイスの登録(audioは実際いらない)
         do {
             let videoInput = try AVCaptureDeviceInput(device: self.videoDevice!) as AVCaptureDeviceInput
             self.captureSession.addInput(videoInput)
         } catch let error as NSError {
             print(error)
         }
-        do {
-            let audioInput = try AVCaptureDeviceInput(device: self.audioDevice!) as AVCaptureInput
-            self.captureSession.addInput(audioInput)
-        } catch let error as NSError {
-            print(error)
-        }
 
         self.videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as AnyHashable as! String : Int(kCVPixelFormatType_32BGRA)]
-
-        //フレーム毎に呼び出すデリゲート登録
-        //let queue:DispatchQueue = DispatchQueue(label:"myqueue",attribite: DISPATCH_QUEUE_SERIAL)
-        let queue:DispatchQueue = DispatchQueue(label: "myqueue", attributes: .concurrent)
+        
+        // フレーム毎に呼び出すデリゲート登録
+        let queue: DispatchQueue = DispatchQueue(label: "myqueue", attributes: .concurrent)
         self.videoOutput.setSampleBufferDelegate(self, queue: queue)
         self.videoOutput.alwaysDiscardsLateVideoFrames = true
 
         self.captureSession.addOutput(self.videoOutput)
-
-        let videoLayer : AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
-        videoLayer.frame = self.view.bounds
-        videoLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-
-        self.view.layer.addSublayer(videoLayer)
-
-        //カメラ向き
+        
+        // カメラ向き
         for connection in self.videoOutput.connections {
             let conn = connection
             if conn.isVideoOrientationSupported {
@@ -92,14 +81,13 @@ class FaceTracker: NSObject,AVCaptureVideoDataOutputSampleBufferDelegate {
     {
         //同期処理（非同期処理ではキューが溜まりすぎて画面がついていかない）
         DispatchQueue.main.sync(execute: {
-
-            //バッファーをUIImageに変換
+            // バッファーをUIImageに変換
             let image = self.imageFromSampleBuffer(sampleBuffer: sampleBuffer)
-            let ciimage:CIImage! = CIImage(image: image)
+            let ciimage: CIImage! = CIImage(image: image)
 
             //CIDetectorAccuracyHighだと高精度（使った感じは遠距離による判定の精度）だが処理が遅くなる
             let detector : CIDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options:[CIDetectorAccuracy: CIDetectorAccuracyHigh] )!
-            let faces : NSArray = detector.features(in: ciimage) as NSArray
+            let faces: NSArray = detector.features(in: ciimage) as NSArray
             
             var rects = Array<CGRect>();
             var _ : CIFaceFeature = CIFaceFeature()
@@ -122,6 +110,21 @@ class FaceTracker: NSObject,AVCaptureVideoDataOutputSampleBufferDelegate {
                 rects.append(faceRect)
             }
             self.findface(rects)
+            
+            view.subviews.forEach { $0.removeFromSuperview() }
+            let imageView = UIImageView(image: image)
+            imageView.contentMode = .scaleAspectFit
+            view.addSubview(imageView)
+            imageView.edges(to: view)
+            imageView.fillSuperview()
+            
+            duplicatedView.subviews.forEach { $0.removeFromSuperview() }
+            let duplicatedImageView = UIImageView(image: image)
+            duplicatedImageView.contentMode = .scaleAspectFit
+            duplicatedView.addSubview(duplicatedImageView)
+            duplicatedImageView.fillSuperview()
+            
+            duplicatedView.layoutIfNeeded()
         })
     }
 }

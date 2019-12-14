@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2rh-7g-FXj">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Face Tracker View Controller-->
+        <scene sceneID="jHh-cL-Ws4">
+            <objects>
+                <viewController id="2rh-7g-FXj" customClass="FaceTrackerViewController" customModule="FaceTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IAc-5A-TB4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MUe-He-6SJ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="MUe-He-6SJ" secondAttribute="trailing" id="Q0A-wS-ZIn"/>
+                            <constraint firstItem="MUe-He-6SJ" firstAttribute="leading" secondItem="1vT-IL-hK4" secondAttribute="leading" id="oQ8-KT-GY2"/>
+                            <constraint firstItem="MUe-He-6SJ" firstAttribute="top" secondItem="1vT-IL-hK4" secondAttribute="top" id="upJ-gO-UOn"/>
+                            <constraint firstItem="1vT-IL-hK4" firstAttribute="bottom" secondItem="MUe-He-6SJ" secondAttribute="bottom" id="zBb-AW-Uq4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1vT-IL-hK4"/>
+                    </view>
+                    <connections>
+                        <outlet property="cameraView" destination="MUe-He-6SJ" id="tGd-L6-Kyx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t9x-XU-1Dg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-39" y="23"/>
+        </scene>
+    </scenes>
+</document>
