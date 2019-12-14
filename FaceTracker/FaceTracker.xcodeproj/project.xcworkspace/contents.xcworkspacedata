@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:EveryonePotatoes.xcodeproj">
+      location = "self:FaceTracker.xcodeproj">
    </FileRef>
 </Workspace>
