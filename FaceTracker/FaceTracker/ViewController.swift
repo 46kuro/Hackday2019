@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import QuartzCore
+import SceneKit
 
 class ViewController: UIViewController {
 
@@ -14,42 +16,44 @@ class ViewController: UIViewController {
     //viewController上に一つviewを敷いてそれと繋いでおく
     @IBOutlet var cameraView :UIView!
 
-    var rectViewFront = UIView()
-    var rectViewBack = UIView()
+    let eggView = SCNView()
+    
+    override func loadView() {
+        super.loadView()
+        
+        setupEggView()
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.rectViewFront.layer.borderWidth = 3
-        self.rectViewBack.layer.borderWidth = 3
-        rectViewBack.layer.borderColor = UIColor.red.cgColor
-        self.view.addSubview(self.rectViewFront)
-        view.addSubview(rectViewBack)
-        
         faceTracker = FaceTracker(view: self.cameraView, findface:{arr in
             if arr.count < 1 {
-                self.rectViewFront.isHidden = true
-                self.rectViewBack.isHidden = true
+                self.eggView.isHidden = true
             }
             if arr.indices.contains(0) {
-                self.rectViewFront.isHidden = false
-                //一番の顔だけ使う
+                self.eggView.isHidden = false
+                // 一番の顔だけ使う
                 let rect1 = arr[0]
-                //四角い枠を顔の位置に移動する
-                self.rectViewFront.frame = rect1
-            }
-            
-            if arr.indices.contains(1) {
-                self.rectViewBack.isHidden = false
-                let rect2 = arr[1]
-                self.rectViewBack.frame = rect2
-            } else {
-                self.rectViewBack.isHidden = true
+                // 顔の位置に移動する
+                self.eggView.frame = rect1
             }
         })
     }
-
     
+    private func setupEggView() {
+        view.addSubview(eggView)
+        view.bringSubviewToFront(eggView)
+        // create a new scene
+        let scene = SCNScene(named: "SceneKitAsset.scnassets/egg.scn")!
+        // set the scene to the view
+        eggView.scene = scene
+        eggView.backgroundColor = .clear
+    }
+
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
 }
 
