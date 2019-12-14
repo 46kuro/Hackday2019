@@ -16,14 +16,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="rtj-mT-aXz">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kUl-Yn-Hih">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="426"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="409"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EV7-OT-NOY">
-                                        <rect key="frame" x="0.0" y="426" width="414" height="426"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f6c-e3-rCa">
+                                        <rect key="frame" x="0.0" y="409" width="414" height="409"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </view>
                                 </subviews>
@@ -32,20 +32,20 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="rtj-mT-aXz" secondAttribute="trailing" id="5WG-X4-HCp"/>
-                            <constraint firstAttribute="bottom" secondItem="rtj-mT-aXz" secondAttribute="bottom" id="VMX-rU-cTD"/>
-                            <constraint firstItem="rtj-mT-aXz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cmu-PZ-clw"/>
-                            <constraint firstItem="rtj-mT-aXz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jhe-xk-txx"/>
+                            <constraint firstItem="rtj-mT-aXz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="HTh-st-fcK"/>
+                            <constraint firstItem="rtj-mT-aXz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OT7-c8-6AQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="rtj-mT-aXz" secondAttribute="bottom" id="r4d-iz-lWU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="cameraView" destination="kUl-Yn-Hih" id="fD9-17-dEF"/>
-                        <outlet property="duplicatedCameraView" destination="EV7-OT-NOY" id="7de-Lk-g4p"/>
+                        <outlet property="duplicatedCameraView" destination="f6c-e3-rCa" id="ale-zG-T7v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="130"/>
+            <point key="canvasLocation" x="137.68115942028987" y="129.91071428571428"/>
         </scene>
     </scenes>
 </document>

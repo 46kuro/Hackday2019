@@ -87,12 +87,6 @@ class ViewController: UIViewController {
         containerView.addSubview(eggView)
         eggView.fillSuperview()
         
-        let rectView = UIView()
-        rectView.backgroundColor = .clear
-        rectView.layer.borderWidth = 3
-        containerView.addSubview(rectView)
-        rectView.fillSuperview()
-        
         eggViews.append(containerView)
     }
 
