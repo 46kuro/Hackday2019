@@ -24,15 +24,14 @@ class ViewController: UIViewController {
         
         Timer.scheduledTimer(timeInterval: 1, 
                              target: self,
-                             selector: #selector(setupEggView),
+                             selector: #selector(setupEggViews),
                              userInfo: nil,
                              repeats: true)
         
         faceTracker = FaceTracker(view: self.cameraView, duplicatedView: duplicatedCameraView) { [weak self] rectList in
             // 数が変わったときはリスト自体を再作成
-            guard self?.rectList.count == rectList.count else {
+            guard (self?.rectList.count ?? 0) == rectList.count else {
                 self?.rectList = rectList
-//                self?.setupEggView()
                 return
             }
             
@@ -55,9 +54,27 @@ class ViewController: UIViewController {
         return sqrt((pow(abs(point.x - anotherPoint.x), 2)) + (pow(abs(point.y - anotherPoint.y), 2)))  
     }
     
-    @objc private func setupEggView() {
-        self.eggViews.forEach { $0.removeFromSuperview() }
-        rectList.forEach { self.appendEggView(in: $0) }
+    @objc private func setupEggViews() {
+        // RectListの値と比較
+        if eggViews.count > rectList.count {
+            // TODO: 値が減っているときは、もっとも距離が短いViewを作っていく
+            // Indexが被っているView, 距離が遠いViewから順に削除していく
+            self.eggViews.forEach { $0.removeFromSuperview() }
+            self.eggViews = []
+            rectList.forEach { self.appendEggView(in: $0) }
+            
+        } else if eggViews.count == rectList.count {
+            // TODO: 値がそのままのときは、Viewを合わせていく
+        } else {
+            // TODO: 値が増えているときは、もっとも距離が短いViewからViewを合わせていく
+            // 足りない分のViewは追加する
+            self.eggViews.forEach { $0.removeFromSuperview() }
+            self.eggViews = []
+            
+            rectList.forEach {
+                self.appendEggView(in: $0)
+            }
+        }
     }
     
     private func appendEggView(in rect: CGRect) {
