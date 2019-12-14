@@ -98,33 +98,30 @@ class FaceTracker: NSObject,AVCaptureVideoDataOutputSampleBufferDelegate {
             let ciimage:CIImage! = CIImage(image: image)
 
             //CIDetectorAccuracyHighだと高精度（使った感じは遠距離による判定の精度）だが処理が遅くなる
-            let detector : CIDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options:[CIDetectorAccuracy: CIDetectorAccuracyLow] )!
+            let detector : CIDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options:[CIDetectorAccuracy: CIDetectorAccuracyHigh] )!
             let faces : NSArray = detector.features(in: ciimage) as NSArray
-
-            if faces.count != 0
-            {
-                var rects = Array<CGRect>();
-                var _ : CIFaceFeature = CIFaceFeature()
-                for feature in faces {
-
-                    // 座標変換
-                    var faceRect : CGRect = (feature as AnyObject).bounds
-                    let widthPer = (self.view.bounds.width/image.size.width)
-                    let heightPer = (self.view.bounds.height/image.size.height)
-
-                    // UIKitは左上に原点があるが、CoreImageは左下に原点があるので揃える
-                    faceRect.origin.y = image.size.height - faceRect.origin.y - faceRect.size.height
-
-                    //倍率変換
-                    faceRect.origin.x = faceRect.origin.x * widthPer
-                    faceRect.origin.y = faceRect.origin.y * heightPer
-                    faceRect.size.width = faceRect.size.width * widthPer
-                    faceRect.size.height = faceRect.size.height * heightPer
-
-                    rects.append(faceRect)
-                }
-                self.findface(rects)
+            
+            var rects = Array<CGRect>();
+            var _ : CIFaceFeature = CIFaceFeature()
+            for feature in faces {
+                
+                // 座標変換
+                var faceRect : CGRect = (feature as AnyObject).bounds
+                let widthPer = (self.view.bounds.width/image.size.width)
+                let heightPer = (self.view.bounds.height/image.size.height)
+                
+                // UIKitは左上に原点があるが、CoreImageは左下に原点があるので揃える
+                faceRect.origin.y = image.size.height - faceRect.origin.y - faceRect.size.height
+                
+                //倍率変換
+                faceRect.origin.x = faceRect.origin.x * widthPer
+                faceRect.origin.y = faceRect.origin.y * heightPer
+                faceRect.size.width = faceRect.size.width * widthPer
+                faceRect.size.height = faceRect.size.height * heightPer
+                
+                rects.append(faceRect)
             }
+            self.findface(rects)
         })
     }
 }
