@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         view.addSubview(eggView)
         view.bringSubviewToFront(eggView)
         // create a new scene
-        let scene = SCNScene(named: "SceneKitAsset.scnassets/poteto.scn")!
+        let scene = SCNScene(named: "SceneKitAsset.scnassets/test.scn")!
         // set the scene to the view
         eggView.scene = scene
         eggView.backgroundColor = .clear
