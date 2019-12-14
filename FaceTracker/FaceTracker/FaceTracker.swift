@@ -6,8 +6,8 @@
 //  Copyright © 2019 齋藤健悟. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 class FaceTracker: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     let captureSession = AVCaptureSession() 
@@ -65,7 +65,7 @@ class FaceTracker: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         let baseAddress = CVPixelBufferGetBaseAddressOfPlane(imageBuffer, 0)
         let bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer)
         let width = CVPixelBufferGetWidth(imageBuffer)
-        let height = CVPixelBufferGetHeight(imageBuffer)
+        let height = CVPixelBufferGetHeight(imageBuffer) / 2
 
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let bitmapInfo = (CGBitmapInfo.byteOrder32Little.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue)
@@ -123,10 +123,8 @@ class FaceTracker: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             duplicatedImageView.contentMode = .scaleAspectFit
             duplicatedView.addSubview(duplicatedImageView)
             duplicatedImageView.fillSuperview()
-            
-            duplicatedView.layoutIfNeeded()
+            let duplicatedRect = imageView.contentClippingRect
+            print(duplicatedRect)
         })
     }
 }
-
-
