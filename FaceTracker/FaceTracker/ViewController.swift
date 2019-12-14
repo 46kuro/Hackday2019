@@ -17,11 +17,15 @@ class ViewController: UIViewController {
     @IBOutlet var cameraView :UIView!
 
     let eggView = SCNView()
+    let rect = UIView()
     
     override func loadView() {
         super.loadView()
         
         setupEggView()
+        
+        rect.layer.borderWidth = 3
+        view.addSubview(rect)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -37,6 +41,7 @@ class ViewController: UIViewController {
                 let rect1 = arr[0]
                 // 顔の位置に移動する
                 self.eggView.frame = rect1
+                self.rect.frame = rect1
             }
         })
     }
