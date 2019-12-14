@@ -27,7 +27,6 @@ class ViewController: UIViewController {
         view.addSubview(rectViewBack)
         
         faceTracker = FaceTracker(view: self.cameraView, findface:{arr in
-            print(arr.count)
             if arr.count < 1 {
                 self.rectViewFront.isHidden = true
                 self.rectViewBack.isHidden = true
