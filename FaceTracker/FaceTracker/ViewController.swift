@@ -16,44 +16,66 @@ class ViewController: UIViewController {
     @IBOutlet var cameraView :UIView!
     @IBOutlet weak var duplicatedCameraView: UIView!
 
-    let eggView = SCNView()
-    let rect = UIView()
+    var eggViews = [UIView]()
+    var rectList = [CGRect]()
     
-    override func loadView() {
-        super.loadView()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        setupEggView()
+        Timer.scheduledTimer(timeInterval: 1, 
+                             target: self,
+                             selector: #selector(setupEggView),
+                             userInfo: nil,
+                             repeats: true)
         
-        rect.layer.borderWidth = 3
-        view.addSubview(rect)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        faceTracker = FaceTracker(view: self.cameraView, duplicatedView: duplicatedCameraView) { arr in
-            if arr.count < 1 {
-                self.eggView.isHidden = true
+        faceTracker = FaceTracker(view: self.cameraView, duplicatedView: duplicatedCameraView) { [weak self] rectList in
+            // 数が変わったときはリスト自体を再作成
+            guard self?.rectList.count == rectList.count else {
+                self?.rectList = rectList
+                self?.setupEggView()
+                return
             }
-            if arr.indices.contains(0) {
-                self.eggView.isHidden = false
-                // 一番の顔だけ使う
-                let rect1 = arr[0]
-                // 顔の位置に移動する
-                self.eggView.frame = rect1
-                self.rect.frame = rect1
-            }
+            
+            // 数が変わらないときは、近いリストのRectを変更する
+            rectList.forEach({ rect in
+                let nearestResultIndex = self?.rectList.enumerated().reduce((0, 10000)) { result, anotherRect -> (Int, CGFloat) in
+                    let rectDistance = self?.distance(from: anotherRect.element.origin, to: rect.origin) ?? 10000 
+                    return rectDistance <= result.1 ? (anotherRect.offset, rectDistance) : result
+                }.0 ?? 0
+                guard (self?.eggViews.count ?? 0) > nearestResultIndex else {
+                    return
+                } 
+                self?.eggViews[nearestResultIndex].frame = rect
+            })
         }
     }
     
-    private func setupEggView() {
-        view.addSubview(eggView)
-        view.bringSubviewToFront(eggView)
-        // create a new scene
-        let scene = SCNScene(named: "SceneKitAsset.scnassets/egg.scn")!
-        // set the scene to the view
-        eggView.scene = scene
+    private func distance(from point: CGPoint, to anotherPoint: CGPoint) -> CGFloat {
+        return sqrt((pow(abs(point.x - anotherPoint.x), 2)) + (pow(abs(point.y - anotherPoint.y), 2)))  
+    }
+    
+    @objc private func setupEggView() {
+        self.eggViews.forEach { $0.removeFromSuperview() }
+        rectList.forEach { self.appendEggView(in: $0) }
+    }
+    
+    private func appendEggView(in rect: CGRect) {
+        let containerView = UIView(frame: rect)
+        view.addSubview(containerView)
+        
+        let eggView = SCNView()
+        eggView.scene = SCNScene(named: "SceneKitAsset.scnassets/egg.scn")!
         eggView.backgroundColor = .clear
+        containerView.addSubview(eggView)
+        eggView.fillSuperview()
+        
+        let rectView = UIView()
+        rectView.backgroundColor = .clear
+        rectView.layer.borderWidth = 3
+        containerView.addSubview(rectView)
+        rectView.fillSuperview()
+        
+        eggViews.append(containerView)
     }
 
     override var prefersStatusBarHidden: Bool {

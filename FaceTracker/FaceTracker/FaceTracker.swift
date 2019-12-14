@@ -123,8 +123,6 @@ class FaceTracker: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             duplicatedImageView.contentMode = .scaleAspectFit
             duplicatedView.addSubview(duplicatedImageView)
             duplicatedImageView.fillSuperview()
-            let duplicatedRect = imageView.contentClippingRect
-            print(duplicatedRect)
         })
     }
 }
