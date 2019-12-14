@@ -64,7 +64,7 @@ class ViewController: UIViewController {
         view.addSubview(containerView)
         
         let eggView = SCNView()
-        eggView.scene = SCNScene(named: "SceneKitAsset.scnassets/egg.scn")!
+        eggView.scene = SCNScene(named: "SceneKitAsset.scnassets/poteto.scn")!
         eggView.backgroundColor = .clear
         containerView.addSubview(eggView)
         eggView.fillSuperview()
