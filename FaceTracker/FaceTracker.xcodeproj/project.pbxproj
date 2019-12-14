@@ -32,7 +32,7 @@
 /* Begin PBXFileReference section */
 		2451335823A4FA1A006586A9 /* potato_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = potato_texture.jpg; sourceTree = "<group>"; };
 		2451335A23A4FB77006586A9 /* potato_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = potato_texture.png; sourceTree = "<group>"; };
-		24D492D323A4BE240080FF02 /* FaceTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		24D492D323A4BE240080FF02 /* みんなじゃがいも.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "みんなじゃがいも.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24D492D623A4BE240080FF02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24D492D823A4BE240080FF02 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		24D492DA23A4BE240080FF02 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -85,7 +85,7 @@
 		24D492D423A4BE240080FF02 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				24D492D323A4BE240080FF02 /* FaceTracker.app */,
+				24D492D323A4BE240080FF02 /* みんなじゃがいも.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -174,7 +174,7 @@
 			);
 			name = FaceTracker;
 			productName = FaceTracker;
-			productReference = 24D492D323A4BE240080FF02 /* FaceTracker.app */;
+			productReference = 24D492D323A4BE240080FF02 /* みんなじゃがいも.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -396,7 +396,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = saitoh0526.k.FaceTracker;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "みんなじゃがいも";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -414,7 +414,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = saitoh0526.k.FaceTracker;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "みんなじゃがいも";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
