@@ -123,7 +123,7 @@ class ViewController: UIViewController {
     
     private func makeEggView() -> UIView {
         let eggView = SCNView()
-        eggView.scene = SCNScene(named: "SceneKitAsset.scnassets/poteto.scn")!
+        eggView.scene = SCNScene(named: "SceneKitAsset.scnassets/potate_with_uv.scn")!
         eggView.backgroundColor = .clear
         return eggView
     }    
