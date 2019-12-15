@@ -51,7 +51,7 @@ class FaceTracker: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         for connection in self.videoOutput.connections {
             let conn = connection
             if conn.isVideoOrientationSupported {
-                conn.videoOrientation = AVCaptureVideoOrientation.landscapeLeft
+                conn.videoOrientation = AVCaptureVideoOrientation.landscapeRight
             }
         }
 
@@ -102,10 +102,10 @@ class FaceTracker: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 faceRect.origin.y = image.size.height - faceRect.origin.y - faceRect.size.height
                 
                 //倍率変換
-                faceRect.origin.x = faceRect.origin.x * widthPer
-                faceRect.origin.y = faceRect.origin.y * heightPer - 20
-                faceRect.size.width = faceRect.size.width * widthPer * 1.5
-                faceRect.size.height = faceRect.size.height * heightPer * 1.5
+                faceRect.origin.x = faceRect.origin.x * widthPer + 10
+                faceRect.origin.y = faceRect.origin.y * heightPer - 40
+                faceRect.size.width = faceRect.size.width * widthPer * 1.75
+                faceRect.size.height = faceRect.size.height * heightPer * 1.75
                 
                 rects.append(faceRect)
             }

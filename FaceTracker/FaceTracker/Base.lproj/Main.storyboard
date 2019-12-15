@@ -16,14 +16,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Pgx-6V-yhB">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kUl-Yn-Hih">
-                                        <rect key="frame" x="0.0" y="0.0" width="207" height="852"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="207" height="896"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f6c-e3-rCa">
-                                        <rect key="frame" x="207" y="0.0" width="207" height="852"/>
+                                        <rect key="frame" x="207" y="0.0" width="207" height="896"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </view>
                                 </subviews>
@@ -31,10 +31,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Pgx-6V-yhB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="GP3-F9-Ewc"/>
                             <constraint firstItem="Pgx-6V-yhB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ia4-V5-HsB"/>
                             <constraint firstAttribute="trailing" secondItem="Pgx-6V-yhB" secondAttribute="trailing" id="MEU-LP-Vnk"/>
                             <constraint firstAttribute="bottom" secondItem="Pgx-6V-yhB" secondAttribute="bottom" id="g8Q-1L-SZj"/>
-                            <constraint firstItem="Pgx-6V-yhB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ogT-Gt-VOH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
