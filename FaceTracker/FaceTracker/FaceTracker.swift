@@ -51,7 +51,7 @@ class FaceTracker: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         for connection in self.videoOutput.connections {
             let conn = connection
             if conn.isVideoOrientationSupported {
-                conn.videoOrientation = AVCaptureVideoOrientation.portrait
+                conn.videoOrientation = AVCaptureVideoOrientation.landscapeLeft
             }
         }
 
@@ -64,8 +64,8 @@ class FaceTracker: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         let baseAddress = CVPixelBufferGetBaseAddressOfPlane(imageBuffer, 0)
         let bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer)
-        let width = CVPixelBufferGetWidth(imageBuffer)
-        let height = CVPixelBufferGetHeight(imageBuffer) / 2
+        let width = CVPixelBufferGetWidth(imageBuffer) / 2
+        let height = CVPixelBufferGetHeight(imageBuffer)
 
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let bitmapInfo = (CGBitmapInfo.byteOrder32Little.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue)
@@ -102,10 +102,10 @@ class FaceTracker: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 faceRect.origin.y = image.size.height - faceRect.origin.y - faceRect.size.height
                 
                 //倍率変換
-                faceRect.origin.x = faceRect.origin.x * widthPer - 20
-                faceRect.origin.y = faceRect.origin.y * heightPer
-                faceRect.size.width = faceRect.size.width * widthPer * 2
-                faceRect.size.height = faceRect.size.height * heightPer * 2
+                faceRect.origin.x = faceRect.origin.x * widthPer
+                faceRect.origin.y = faceRect.origin.y * heightPer - 20
+                faceRect.size.width = faceRect.size.width * widthPer * 1.5
+                faceRect.size.height = faceRect.size.height * heightPer * 1.5
                 
                 rects.append(faceRect)
             }

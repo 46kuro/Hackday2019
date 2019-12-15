@@ -40,7 +40,7 @@ class ViewController: UIViewController {
             }
             
             // 数が変わらないときは、近いリストのRectを変更する
-            let cameraHeight = self.cameraView.frame.height
+            let cameraWidth = self.cameraView.frame.width
             rectList.forEach({ rect in
                 let nearestResultIndex = self.rectList.enumerated().reduce((0, 10000)) { result, anotherRect -> (Int, CGFloat) in
                     let rectDistance = self.distance(from: anotherRect.element.origin, to: rect.origin) 
@@ -51,8 +51,8 @@ class ViewController: UIViewController {
                 self.eggViews[nearestResultIndex].frame = rect
                 
                 guard self.duplicatedEggViews.count > nearestResultIndex else { return } 
-                self.duplicatedEggViews[nearestResultIndex].frame = CGRect(x: rect.origin.x, 
-                                                                           y: rect.origin.y + cameraHeight,
+                self.duplicatedEggViews[nearestResultIndex].frame = CGRect(x: rect.origin.x + cameraWidth, 
+                                                                           y: rect.origin.y,
                                                                            width: rect.width,
                                                                            height: rect.height)
             })
@@ -102,8 +102,8 @@ class ViewController: UIViewController {
         duplicatedEggViews = []
         
         rectList.forEach {
-            let y = $0.origin.y + cameraView.frame.height
-            duplicatedRectList.append(CGRect(x: $0.origin.x, y: y, width: $0.size.width, height: $0.size.height))
+            let x = $0.origin.x + cameraView.frame.width
+            duplicatedRectList.append(CGRect(x: x, y: $0.origin.y, width: $0.size.width, height: $0.size.height))
         }
         duplicatedRectList.forEach { 
             appendDuplicatedEggView(in: $0)
