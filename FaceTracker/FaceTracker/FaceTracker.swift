@@ -102,10 +102,10 @@ class FaceTracker: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 faceRect.origin.y = image.size.height - faceRect.origin.y - faceRect.size.height
                 
                 //倍率変換
-                faceRect.origin.x = faceRect.origin.x * widthPer - 10
-                faceRect.origin.y = faceRect.origin.y * heightPer + 40
-                faceRect.size.width = faceRect.size.width * widthPer * 1.5
-                faceRect.size.height = faceRect.size.height * heightPer * 1.5
+                faceRect.origin.x = faceRect.origin.x * widthPer - 20
+                faceRect.origin.y = faceRect.origin.y * heightPer
+                faceRect.size.width = faceRect.size.width * widthPer * 2
+                faceRect.size.height = faceRect.size.height * heightPer * 2
                 
                 rects.append(faceRect)
             }
