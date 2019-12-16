@@ -51,7 +51,7 @@ class FaceTracker: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         for connection in self.videoOutput.connections {
             let conn = connection
             if conn.isVideoOrientationSupported {
-                conn.videoOrientation = AVCaptureVideoOrientation.landscapeRight
+                conn.videoOrientation = AVCaptureVideoOrientation.landscapeLeft
             }
         }
 
@@ -59,12 +59,12 @@ class FaceTracker: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 
     func imageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage {
-        //バッファーをUIImageに変換
+        // バッファーをUIImageに変換
         let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
         CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         let baseAddress = CVPixelBufferGetBaseAddressOfPlane(imageBuffer, 0)
         let bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer)
-        let width = CVPixelBufferGetWidth(imageBuffer) / 2
+        let width = CVPixelBufferGetWidth(imageBuffer) / 2 // 画面を2分割したため
         let height = CVPixelBufferGetHeight(imageBuffer)
 
         let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -79,13 +79,13 @@ class FaceTracker: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection)
     {
-        //同期処理（非同期処理ではキューが溜まりすぎて画面がついていかない）
+        // 同期処理（非同期処理ではキューが溜まりすぎて画面がついていかない）
         DispatchQueue.main.sync(execute: {
             // バッファーをUIImageに変換
             let image = self.imageFromSampleBuffer(sampleBuffer: sampleBuffer)
             let ciimage: CIImage! = CIImage(image: image)
 
-            //CIDetectorAccuracyHighだと高精度（使った感じは遠距離による判定の精度）だが処理が遅くなる
+            // CIDetectorAccuracyHighだと高精度（使った感じは遠距離による判定の精度）だが処理が遅くなる
             let detector : CIDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options:[CIDetectorAccuracy: CIDetectorAccuracyHigh] )!
             let faces: NSArray = detector.features(in: ciimage) as NSArray
             
@@ -101,9 +101,9 @@ class FaceTracker: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 // UIKitは左上に原点があるが、CoreImageは左下に原点があるので揃える
                 faceRect.origin.y = image.size.height - faceRect.origin.y - faceRect.size.height
                 
-                //倍率変換
-                faceRect.origin.x = faceRect.origin.x * widthPer + 10
-                faceRect.origin.y = faceRect.origin.y * heightPer - 40
+                // 倍率変換(iPhoneXでモデルが顔の形にはまるように微調整している)
+                faceRect.origin.x = faceRect.origin.x * widthPer + (0.1 * faceRect.size.width * widthPer)
+                faceRect.origin.y = faceRect.origin.y * heightPer - (0.4 * faceRect.size.height * widthPer)
                 faceRect.size.width = faceRect.size.width * widthPer * 1.75
                 faceRect.size.height = faceRect.size.height * heightPer * 1.75
                 
